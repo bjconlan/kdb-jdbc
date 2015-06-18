@@ -1,2 +1,2 @@
 # kdb-jdbc
-Packaged depencency of the kdb jdbc driver &amp; protocol classes as provided at http://kx.com/q/c/
+Packaged dependencies of the kdb+ JDBC driver &amp; protocol/connection classes as provided at http://kx.com/q/c/
