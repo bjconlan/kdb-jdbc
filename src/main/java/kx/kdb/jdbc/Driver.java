@@ -327,7 +327,7 @@ public class Driver implements java.sql.Driver {static int V=2,v=0;static void O
 		public boolean getBoolean(int i)throws SQLException{return((Boolean)getObject(i)).booleanValue();}
 		public byte getByte(int i)throws SQLException{return((Byte)getObject(i)).byteValue();}
 		public short getShort(int i)throws SQLException{Object x=getObject(i);return x==null?0:((Short)x).shortValue();}
-		public int getInt(int i)throws SQLException{Object x=getObject(i);return x==null?0:((Integer)x).intValue();}
+		public int getInt(int i)throws SQLException{Object x=getObject(i);return x==null?0:((Long)x).intValue();}
 		public long getLong(int i)throws SQLException{Object x=getObject(i);return x==null?0:((Long)x).longValue();}
 		public float getFloat(int i)throws SQLException{Object x=getObject(i);return x==null?0:((Float)x).floatValue();}
 		public double getDouble(int i)throws SQLException{Object x=getObject(i);return x==null?0:((Double)x).doubleValue();}

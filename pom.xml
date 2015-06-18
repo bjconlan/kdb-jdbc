@@ -4,6 +4,6 @@
  
   <groupId>com.github.bjconlan.kx.kdb</groupId>
   <artifactId>jdbc4</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
 </project>
