@@ -1,5 +1,5 @@
 package kx.kdb.jdbc;
-import kx.kdb.c;
+import kx.kdb.protocol.c;
 
 import java.io.*;import java.math.*;import java.sql.*;import java.net.URL;import java.util.Calendar;import java.util.Map;import java.util.Properties;import java.util.logging.Logger;import java.util.concurrent.Executor;
 //2014.03.25 allow calling connection close() even if already closed, use jdk1.7 api
@@ -24,7 +24,7 @@ public class Driver implements java.sql.Driver {static int V=2,v=0;static void O
 	static void q(String s)throws SQLException{throw new SQLException(s);}static void q()throws SQLException{throw new SQLFeatureNotSupportedException("nyi");}
 	static void q(Exception e)throws SQLException{throw new SQLException(e.getMessage());}
 
-	public class co implements Connection{private kx.kdb.c c;public co(String s,Object u,Object p)throws SQLException{int i=s.indexOf(":");
+	public class co implements Connection{private kx.kdb.protocol.c c;public co(String s,Object u,Object p)throws SQLException{int i=s.indexOf(":");
 		try{c=new c(s.substring(0,i),Integer.parseInt(s.substring(i+1)),u==null?"":(String)u+":"+(String)p);}catch(Exception e){q(e);}}
 		public Object ex(String s,Object[]p)throws SQLException{try{return 0<c.n(p)?c.k(s,p):c.k(".o.ex",s.toCharArray());}catch(Exception e){q(e);return null;}}
 		public rs qx(String s)throws SQLException{try{return new rs(null,c.k(s));}catch(Exception e){q(e);return null;}}
@@ -157,7 +157,7 @@ public class Driver implements java.sql.Driver {static int V=2,v=0;static void O
 		public void setDate(int i,Date x)throws SQLException{setObject(i,x);}
 		public void setTime(int i,Time x)throws SQLException{setObject(i,x);}
 		public void setTimestamp(int i,Timestamp x)throws SQLException{setObject(i,x);}
-		public void setBytes(int i,byte x[])throws SQLException{q();}
+		public void setBytes(int i,byte x[])throws SQLException{setObject(i, new String(x));} // FIXME with proper kdb type (be wary of encoding)
 		public void setBigDecimal(int i,BigDecimal x)throws SQLException{q();}
 		public void setAsciiStream(int i,InputStream x,int length)throws SQLException{q();}
 		public void setUnicodeStream(int i,InputStream x,int length)throws SQLException{q();}

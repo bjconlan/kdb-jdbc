@@ -3,7 +3,71 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>com.github.bjconlan.kx.kdb</groupId>
-  <artifactId>jdbc4</artifactId>
-  <version>1.0.1</version>
-  <packaging>jar</packaging>
+  <artifactId>kdb-jdbc</artifactId>
+  <version>1.0.0</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.test.skip>true</maven.test.skip>
+    <github.global.server>github</github.global.server>
+  </properties>
+
+  <distributionManagement>
+    <repository>
+      <id>internal.repo</id>
+      <name>Temporary Staging Repository</name>
+      <url>file://${project.build.directory}/mvn-repo</url>
+    </repository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>com.github.bjconlan</id>
+      <url>https://raw.github.com/bjconlan/repository/release</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.github.bjconlan.kx.kdb</groupId>
+      <artifactId>kdb-protocol</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.8.2</version>
+      </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.12</version>
+        <configuration>
+          <message>Maven artifacts for ${project.build.finalName}</message>
+          <noJekyll>true</noJekyll>
+          <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+          <branch>refs/heads/release</branch>
+          <includes>
+            <include>**/*</include>
+          </includes>
+          <repositoryOwner>bjconlan</repositoryOwner>
+          <repositoryName>repository</repositoryName>
+          <merge>true</merge>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
